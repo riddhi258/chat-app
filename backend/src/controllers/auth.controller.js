@@ -1,7 +1,7 @@
-import generateToken from "../lib/Utills";
-import User from "../models/user.model";
-import bcrypt from "bcryptjs";
-import cloudinary from "../lib/cloudinary";
+const generateToken = require("../lib/Utills");
+const User = require("../models/user.model");
+const bcrypt = require("bcryptjs");
+const cloudinary = require("../lib/cloudinary");
 
 const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
@@ -63,9 +63,9 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
-    if (!isPasswordCorrect) {
-      return res.status(400).json({ message: "Invalid credentials" });
+    const isPasswordCorrect = await bcrypt.compare(password,user.password);
+    if(!isPasswordCorrect){
+        return res.status(400).json({ message: "invaild credentials" });
     }
 
     generateToken(user._id, res);
@@ -82,15 +82,14 @@ const login = async (req, res) => {
 };
 
 const logout = (_, res) => {
-  try {
-    res.cookie("jwt", " ", { maxAge: 0 });
+   try {
+    res.cookie("jwt"," ",{maxAge:0})
     res.status(200).json({ message: "Logged out Successfully" });
-  } catch (error) {
+   } catch (error) {
     console.error("Error in logout controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
-  }
+   }
 };
-
 const updateProfile = async (req, res) => {
   try {
     const { profilePic } = req.body;
@@ -122,6 +121,7 @@ const updateProfile = async (req, res) => {
   }
 };
 
+
 const checkAuth = (req, res) => {
   try {
     res.status(200).json(req.user);
@@ -130,8 +130,7 @@ const checkAuth = (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-export {
+module.exports={
   signup,
   login,
   logout,
