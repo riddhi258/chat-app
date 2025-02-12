@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "type": "module",
     "body-parser": "^1.20.3",
     "chat": "file:..",
     "cloudinary": "^2.5.1",
