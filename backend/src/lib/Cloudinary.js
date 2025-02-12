@@ -1,5 +1,5 @@
-const cloudinary = require("cloudinary").v2;
-require("dotenv").config();
+import { v2 as cloudinary } from "cloudinary";
+import dotenv from "dotenv";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

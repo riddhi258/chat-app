@@ -1,10 +1,9 @@
-const User = require ("../models/user.model");
-const Message = require ("../models/message.model.js");
-  
-const cloudinary =require ("../lib/cloudinary.js");
-const { getReceiverSocketId, io } = require("../lib/Socket.js");
+import User from "../models/user.model";
+import Message from "../models/message.model.js";
+import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketId, io } from "../lib/Socket.js";
 
- const getUsersForSidebar = async (req, res) => {
+export const getUsersForSidebar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
     const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
@@ -16,7 +15,7 @@ const { getReceiverSocketId, io } = require("../lib/Socket.js");
   }
 };
 
- const getMessages = async (req, res) => {
+export const getMessages = async (req, res) => {
   try {
     const { id: userToChatId } = req.params;
     const myId = req.user._id;
@@ -35,7 +34,7 @@ const { getReceiverSocketId, io } = require("../lib/Socket.js");
   }
 };
 
-const sendMessage = async (req, res) => {
+export const sendMessage = async (req, res) => {
   try {
     const { text, image } = req.body;
     const { id: receiverId } = req.params;
@@ -76,10 +75,3 @@ const sendMessage = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
-
-module.exports= {
-  getUsersForSidebar,
-  getMessages,
-  sendMessage,
-}

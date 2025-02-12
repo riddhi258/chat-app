@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.3",
     "@tailwindcss/vite": "^4.0.3",
+     "type": "module",
     "axios": "^1.7.9",
     "chat": "file:..",
     "lucide-react": "^0.474.0",
