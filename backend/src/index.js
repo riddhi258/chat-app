@@ -27,12 +27,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname,"../frontend/dist"))
-    );
+    app.use(express.static(path.join(staticPath, "../frontend/dist")));
 }
 
 server.listen(PORT, () => {
-    console.log("server is running port :" + PORT);
+    console.log("server is running on port: " + PORT);
     connectDB();
 }).on('error', (err) => {
     if (err.code === 'EADDRINUSE') {
