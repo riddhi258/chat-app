@@ -1,6 +1,6 @@
 const User = require ("../models/user.model");
 const Message = require("../models/message.model.js");
-const cloudinary = require("../lib/cloudinary");
+const cloudinary = require("../lib/Cloudinary.js");
 const { getReceiverSocketId, io } = require("../lib/Socket.js");
 
  const getUsersForSidebar = async (req, res) => {
