@@ -1,6 +1,6 @@
-import { config } from "dotenv";
-import { connectDB } from "../lib/db.js";
-import User from "../models/user.model.js";
+const { config } = require("dotenv");
+const { connectDB } = require("../lib/db.js");
+const User = require("../models/user.model.js");
 
 config();
 
