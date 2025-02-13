@@ -114,4 +114,4 @@ const seedDatabase = async () => {
 // Call the function
 seedDatabase();
 
-module.exports = seedDatabase;
+module.exports = {seedDatabase};
