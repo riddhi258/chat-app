@@ -1,4 +1,4 @@
-const generateToken = require ("../lib/Utills");
+const { generateToken } = require("../lib/Utills");
 const User = require ( "../models/user.model");
 const bcrypt = require ("bcryptjs");
 const cloudinary = require ("../lib/Cloudinary");
@@ -39,6 +39,14 @@ const signup = async (req, res) => {
       email: newUser.email,
       profilePic: newUser.profilePic,
     });
+
+    // Emit event to Socket.io
+    if (req.app.get('socketio')) {
+      const io = req.app.get('socketio');
+      io.emit('newUser', newUser);
+    } else {
+      console.error("Socket.io is not initialized");
+    }
   } catch (error) {
     console.error("Error in signup controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });

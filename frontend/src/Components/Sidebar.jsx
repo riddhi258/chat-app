@@ -50,19 +50,16 @@ const Sidebar = () => {
           <button
             key={user._id}
             onClick={() => setSelectedUser(user)}
-            className={`
-              w-full p-3 flex items-center gap-3
-              hover:bg-base-300 transition-colors
-              ${
-                selectedUser?._id === user._id
-                  ? "bg-base-300 ring-1 ring-base-300"
-                  : ""
-              }
-            `}
+            className={`w-full p-3 flex items-center gap-3 hover:bg-base-300 transition-colors ${
+              selectedUser?._id === user._id ? "bg-base-300 ring-1 ring-base-300" : ""
+            }`}
           >
             <div className="avatar relative">
               <div className="size-10 rounded-full">
-                <img src={user.profilePic || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2aQXN1NerXBxKN3NqF5WWR78ZXKxa5z2URA&s"} alt={user.fullName} />
+                <img
+                  src={user.profilePic || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2aQXN1NerXBxKN3NqF5WWR78ZXKxa5z2URA&s"}
+                  alt={user.fullName}
+                />
                 {onlineUsers.includes(user._id) && (
                   <span className="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-500"></span>
                 )}

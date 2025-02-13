@@ -3,7 +3,7 @@ const Message = require("../models/message.model.js");
 const cloudinary = require("../lib/Cloudinary.js");
 const { getReceiverSocketId, io } = require("../lib/Socket.js");
 
- const getUsersForSidebar = async (req, res) => {
+const getUsersForSidebar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
     const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
