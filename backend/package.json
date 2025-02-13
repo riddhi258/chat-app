@@ -12,7 +12,6 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "type": "module",
     "body-parser": "^1.20.3",
     "chat": "file:..",
     "cloudinary": "^2.5.1",
@@ -23,6 +22,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.13.0",
     "mongoose": "^8.9.5",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "type": "^2.7.3"
   }
 }
