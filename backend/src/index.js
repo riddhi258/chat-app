@@ -17,8 +17,7 @@ const corsOptions = {
 };
 
 const PORT = process.env.PORT || 5001;
-
-const staticPath = path.join(__dirname, "../frontend/dist");
+const staticPath = path.resolve();
 
 app.use(cors(corsOptions));
 app.use(cookieParser());
@@ -28,11 +27,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(staticPath));
-
-    app.get('*', (_req, res) => {
-        res.sendFile(path.join(staticPath, "index.html"));
-    });
+    app.use(express.static(path.join(__dirname,"../frontend/dist"))
+    );
 }
 
 server.listen(PORT, () => {
