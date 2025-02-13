@@ -23,6 +23,6 @@
     "mongodb": "^6.13.0",
     "mongoose": "^8.9.5",
     "socket.io": "^4.8.1",
-    "type": "^2.7.3"
+      "type": "module"
   }
 }
