@@ -1,5 +1,6 @@
 import { useChatStore } from "../store/useChatStore";
 import { useEffect, useRef } from "react";
+import { toast } from "react-toastify"; // Import toast for notifications
 
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
@@ -82,7 +83,7 @@ const ChatContainer = () => {
               </time>
               {message.senderId === authUser._id && (
                 <button
-                  onClick={() => deleteMessage(message._id)}
+                  onClick={() => handleDeleteMessage(message._id)}
                   className="text-xs text-red-500 ml-2"
                 >
                   Delete
@@ -107,4 +108,5 @@ const ChatContainer = () => {
     </div>
   );
 };
+
 export default ChatContainer;
