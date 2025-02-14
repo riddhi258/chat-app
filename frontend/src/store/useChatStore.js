@@ -64,5 +64,11 @@ export const useChatStore = create((set, get) => ({
     socket.off("newMessage");
   },
 
+  deleteMessage: (messageId) => {
+    set((state) => ({
+      messages: state.messages.filter((message) => message._id !== messageId),
+    }));
+  },
+
   setSelectedUser: (selectedUser) => set({ selectedUser }),
 }));

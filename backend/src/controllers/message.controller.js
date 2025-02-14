@@ -15,7 +15,7 @@ const getUsersForSidebar = async (req, res) => {
   }
 };
 
- const getMessages = async (req, res) => {
+const getMessages = async (req, res) => {
   try {
     const { id: userToChatId } = req.params;
     const myId = req.user._id;
@@ -34,7 +34,7 @@ const getUsersForSidebar = async (req, res) => {
   }
 };
 
- const sendMessage = async (req, res) => {
+const sendMessage = async (req, res) => {
   try {
     const { text, image } = req.body;
     const { id: receiverId } = req.params;
@@ -99,4 +99,5 @@ const deleteMessage = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-module.exports = { getUsersForSidebar, getMessages, sendMessage };
+
+module.exports = { getUsersForSidebar, getMessages, sendMessage, deleteMessage };

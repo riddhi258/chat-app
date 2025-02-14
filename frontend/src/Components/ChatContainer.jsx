@@ -15,6 +15,7 @@ const ChatContainer = () => {
     selectedUser,
     subscribeToMessages,
     unsubscribeFromMessages,
+    deleteMessage, // Add deleteMessage from the store
   } = useChatStore();
   const { authUser } = useAuthStore();
   const messageEndRef = useRef(null);
@@ -70,6 +71,14 @@ const ChatContainer = () => {
               <time className="text-xs opacity-50 ml-1">
                 {formatMessageTime(message.createdAt)}
               </time>
+              {message.senderId === authUser._id && (
+                <button
+                  onClick={() => deleteMessage(message._id)}
+                  className="text-xs text-red-500 ml-2"
+                >
+                  Delete
+                </button>
+              )}
             </div>
             <div className="chat-bubble flex flex-col">
               {message.image && (

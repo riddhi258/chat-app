@@ -14,11 +14,9 @@ export const useAuthStore = create((set, get) => ({
   onlineUsers: [],
   socket: null,
 
-
   checkAuth: async () => {
     try {
       const res = await axiosInstance.get("/auth/check");
-
       set({ authUser: res.data });
       get().connectSocket();
     } catch (error) {
@@ -49,7 +47,7 @@ export const useAuthStore = create((set, get) => ({
       const res = await axiosInstance.post("/auth/login", data);
       set({ authUser: res.data });
       toast.success("Logged in successfully");
-       get().connectSocket();
+      get().connectSocket();
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
@@ -82,28 +80,38 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
+  deleteMessage: async (messageId) => {
+    try {
+      await axiosInstance.delete(`/messages/${messageId}`);
+      toast.success("Message deleted successfully");
+    } catch (error) {
+      console.log("Error in deleteMessage:", error);
+      toast.error(error.response.data.message);
+    }
+  },
+
   connectSocket: () => {
-    const {authUser} = get()
-    if(!authUser || get().socket?.connected) return;
-    const socket = io(BASE_URL,{
-      query:{
-        userId:authUser._id
-      }
-    })
-    set({socket:socket});
+    const { authUser } = get();
+    if (!authUser || get().socket?.connected) return;
+    const socket = io(BASE_URL, {
+      query: {
+        userId: authUser._id,
+      },
+    });
+    set({ socket: socket });
 
     socket.on("connect", () => {
       console.log("Socket connected");
     });
 
     socket.on("getOnlineUsers", (userIds) => {
-      set({onlineUsers:userIds});
+      set({ onlineUsers: userIds });
     });
 
     socket.connect();
   },
+
   disconnectSocket: () => {
-  if(get().socket?.connected) 
-    get().socket.disconnect();
-  }
+    if (get().socket?.connected) get().socket.disconnect();
+  },
 }));
