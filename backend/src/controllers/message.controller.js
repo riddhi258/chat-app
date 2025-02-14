@@ -99,4 +99,4 @@ const deleteMessage = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-module.exports = { getUsersForSidebar, getMessages, sendMessage,deleteMessage };
+module.exports = { getUsersForSidebar, getMessages, sendMessage };

@@ -14,6 +14,7 @@ export const useAuthStore = create((set, get) => ({
   onlineUsers: [],
   socket: null,
 
+
   checkAuth: async () => {
     try {
       const res = await axiosInstance.get("/auth/check");
@@ -104,15 +105,5 @@ export const useAuthStore = create((set, get) => ({
   disconnectSocket: () => {
   if(get().socket?.connected) 
     get().socket.disconnect();
-  },
-
-  deleteMessage: async (messageId) => {
-    try {
-      await axiosInstance.delete(`/messages/${messageId}`);
-      toast.success("Message deleted successfully");
-    } catch (error) {
-      console.log("Error in deleteMessage:", error);
-      toast.error(error.response.data.message);
-    }
   }
 }));
