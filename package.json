@@ -11,6 +11,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    }
+    "react-hot-toast": "^2.5.1"
   }
-
+}
