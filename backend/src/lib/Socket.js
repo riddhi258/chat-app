@@ -18,7 +18,7 @@ const userSocketMap = {}; // Keeps track of the users and their socket IDs
 
 // Get socket ID for a specific user
 const getReceiverSocketId = (userId) => {
-  return userSocketMap[userId];
+  return userSocketMap[userId] || null;
 };
 
 // Handle socket connections
