@@ -15,10 +15,19 @@ const ChatContainer = () => {
     selectedUser,
     subscribeToMessages,
     unsubscribeFromMessages,
-    deleteMessage,
+    deleteMessage, // Add deleteMessage from the store
   } = useChatStore();
   const { authUser } = useAuthStore();
   const messageEndRef = useRef(null);
+
+  const handleDeleteMessage = async (messageId) => {
+    try {
+      await deleteMessage(messageId);
+      toast.success("Message deleted successfully");
+    } catch (error) {
+      toast.error("Error deleting message");
+    }
+  };
 
   useEffect(() => {
     getMessages(selectedUser._id);
