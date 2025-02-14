@@ -24,30 +24,32 @@ export const useChatStore = create((set, get) => ({
 
   getMessages: async (userId) => {
     set({ isMessagesLoading: true });
-    toast.loading("Fetching messages...");
     try {
       const res = await axiosInstance.get(`/messages/${userId}`);
       set({ messages: res.data });
-      toast.success("Messages fetched successfully");
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
       set({ isMessagesLoading: false });
-      toast.dismiss();
     }
   },
-
   sendMessage: async (messageData) => {
     const { selectedUser, messages } = get();
-    toast.loading("Sending message...");
     try {
       const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
       set({ messages: [...messages, res.data] });
-      toast.success("Message sent successfully");
     } catch (error) {
       toast.error(error.response.data.message);
-    } finally {
-      toast.dismiss();
+    }
+  },
+
+  deleteMessage: async (messageId) => {
+    const { messages } = get();
+    try {
+      await axiosInstance.delete(`/messages/${messageId}`);
+      set({ messages: messages.filter(message => message._id !== messageId) });
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   },
 
@@ -71,12 +73,7 @@ export const useChatStore = create((set, get) => ({
     const socket = useAuthStore.getState().socket;
     socket.off("newMessage");
   },
-
-  deleteMessage: (messageId) => {
-    set((state) => ({
-      messages: state.messages.filter((message) => message._id !== messageId),
-    }));
-  },
+  
 
   setSelectedUser: (selectedUser) => set({ selectedUser }),
 }));
