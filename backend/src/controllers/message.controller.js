@@ -91,7 +91,7 @@ const deleteMessage = async (req, res) => {
       return res.status(403).json({ error: "You are not authorized to delete this message" });
     }
 
-    await message.remove();
+    await message.deleteOne();
 
     res.status(200).json({ message: "Message deleted successfully" });
   } catch (error) {
